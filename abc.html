@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Image editor</title>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+  
+ <style>
+    img {
+    -webkit-filter: saturate(100%) brightness(100%) grayscale(0%) sepia(0%) invert(0%) blur(0px) contrast(1);
+    filter:saturate(100%) brightness(100%) grayscale(0%) sepia(0%) invert(0%) blur(0px) contrast(1);
+    
+   }
+   #file_select_section{
+     position:fixed;
+	 top:93%;
+	 width:100%;
+	 height:auto;
+	 align-item:center;
+	 justify-content:center;
+  }
+  .row.card{
+     box-shadow:1px 1px 5px rgba(0,0, 0, 0.4);
+  }
+  input{
+    cursor:pointer;
+  }
+  nav{
+    background-color:#e91e63;
+	box-shadow:1px 1px 5px rgba(0,0, 0, 0.4);
+	height:60px;
+  }
+  aside{
+    position:fixed;
+	top:0%;
+	bottom:10%;
+	z-index:1;
+	height:100%;
+	width:100%;
+	background-color:#2b223b;
+	overflow-y:scroll;
+	transition:display 1.3s;
+  }
+  #c{
+		  border: dashed 1px black;
+		  display:none;
+   }
+  
+ .fa.fa-bars.text-light.px-2.py-2.p-3{
+   cursor:pointer;
+   font-size:25px
+   
+ 
+ }
+  </style>
+  
+  
+  </head>
+  
+  
+  <body>
+  <nav class='sticky-top d-flex' >
+  
+     <i class='fa fa-bars text-light px-2 py-2 p-3' onclick='openAside()'></i>
+  
+  </nav>
+<aside>
+  
+  <div class='container mt-5'>
+    <div class='row card-body'>
+	  <div class='col-sm-12'>
+	    
+	    <i class='fa fa-times text-light px-2 py-2 '  onclick='closeAside()'> </i>
+	  </div>
+	  <div class='col-sm-12 card-body'>
+	    <div class='row card '>
+		  
+		  <div class='col-sm-12 mt-3 '>
+				  <div class='row'>
+				     <div class='col-sm-12'>
+					    <small>Blur</small>
+					 </div>
+				     <div class='col-sm-12 d-flex'>
+					    <input type='range'   min="0" max="10" value="0"  disabled id='blury' onchange='bluring()'/>
+						<h6 id='blur_value'>0 px</h6>
+				     </div>
+				  </div>
+				  
+		  </div>
+		  <div class='col-sm-12'>
+		           <div class='row'>
+				     <div class='col-sm-12'>
+					    <small>Garyscale</small>
+					 </div>
+				     <div class='col-sm-12 d-flex'>
+					    <input type='range'     disabled min="0" max="100" value="0" id='grayscale' onchange='grayScale()'/>
+				        <h6 id='grayscale_value'>0%</h6>
+				     </div>
+				  </div>
+				  
+		  </div>
+			 <div class='col-sm-12'>
+			  <div class='row'>
+				     <div class='col-sm-12'>
+					    <small>Sepia</small>
+					 </div>
+				     <div class='col-sm-12 d-flex'>
+					    <input type='range'   disabled min="0" max="100" value="0" id='sepia' onchange='sepia()'/>
+				        <h6 id='sepia_value'>0%</h6>
+				     </div>
+			  </div>
+					
+
+
+             </div>	
+			 <div class='col-sm-12'>
+                     <div class='row'>
+				     <div class='col-sm-12'>
+					    <small>Invert</small>
+					 </div>
+				     <div class='col-sm-12 d-flex'>
+					    <input type='range'  disabled  min="0" max="100" value="0" id='invert' onchange='invert()'/>
+				        <h6 id='invert_value'>0%</h6>
+				     </div>
+				  </div>
+					
+
+             </div>
+			 <div class='col-sm-12'>
+				  <div class='row'>
+				      <div class='col-sm-12'>
+					    <small>Contrast</small>
+					  </div>
+				      <div class='col-sm-12 d-flex'>
+					    <input type='range'  disabled  min="0" max="1000" id='contrast' onchange='contrast()'/>
+				        <h6 id='contrast_value'>0%</h6>
+					  </div>
+				  </div>
+					
+
+             </div>
+			 <div class='col-sm-12'>
+                    <div class='row'>
+				     <div class='col-sm-12'>
+					    <small>brightness</small>
+					 </div>
+				     <div class='col-sm-12 d-flex'>
+					    <input type='range'  disabled  min="0" max="500" value="100"  id='brighter' onchange='brighting()'/>
+				        <h6 id='brightness_value'>100%</h6>
+				     </div>
+				  </div>
+					
+
+             </div>
+			 <div class='col-sm-12'>
+                     <div class='row'>
+				     <div class='col-sm-12'>
+					   <small>Saturation</small>
+					 </div>
+				     <div class='col-sm-12 d-flex'>
+					    <input type='range' disabled   min="0" max="500" value="0" id='satur' onchange='satr()'/>
+				        <h6 id='saturation_value'>0%</h6>
+				     </div>
+				  </div>
+					
+
+             </div>
+			 
+			 <div class='col-sm-12 mb-3'>
+			     <div class='row'>
+				     <div class='col-sm-12'>
+					     <small>Zoom</small>
+					 </div>
+				     <div class='col-sm-12 d-flex'>
+					    <input type='range'  disabled  min="1" max="5" id='zoom' onchange='zoomPhoto()'/>
+						  <h6 id='zoom_value'>0%</h6>
+				     </div>
+				  </div>
+			</div>
+		</div>
+	  </div>
+	 </div>
+	</div>
+</aside>
+<!--- input your image---->
+<div class='container mt-5'>
+   <div class='row card-body'>
+		<div class='col-sm-12'>
+		   <center><canvas id="c"></canvas></center>
+		</div>
+		<div class='col-sm-12'>
+		
+		  <img src=""  id='demo_img'class='img-fluid'>
+		</div>
+   </div>
+</div>
+<!-- browes your file button--->
+<section class='fixed-bottom mb-3' id='browes_file_section'>
+<div class='container'>
+   <div class='row'>
+     <div class='col-sm-12'>
+	    <center>
+            <button class='btn btn-success'  style='background:#3B1470;border:#3B1470;'onclick='handleInputFileButton()'>BROWES FILE</button>
+        </center>
+		 <center>
+           <a class='btn btn-primary mt-3'  id='download'>DOWNLOAD</a>
+         </center>
+     </div>
+   
+    </div>
+</div>
+
+</section>
+<input type="file" id="infile"   style='opacity:0'onchange="handleFiles(this.files)">
+
+</body>
+  <!-- handling asidebar--->
+ 
+  
+  
+  <script>
+      const handleInputFileButton =()=>{
+	    document.getElementById('infile').click();
+	  
+	  }
+     let dis_arr=["blury","grayscale","sepia","invert","contrast","brighter","satur","zoom"];
+	  const remove_input_att =(arr)=>{
+	     arr.forEach((element)=>{
+		    document.getElementById(element).removeAttribute('disabled');
+		 });
+	  }
+	 let window_height;
+	 let window_width;
+	 let img_height;
+	 let img_width;
+	 let canvas = document.getElementById("c");
+	 let ctx = canvas.getContext('2d');
+	 let imger = new Image();
+	 imger.addEventListener('load', function(e) {
+	 window_height=screen.height;
+	 window_width=screen.width;
+		       canvas.height=e.target.height;
+			   canvas.width=e.target.width;
+			   img_height=e.target.height;
+			   img_width=e.target.width
+			   ctx.filter = 'none';
+			   //ctx.drawImage(imger, 0, 0,200,300,0,0,100,100);
+			   ctx.drawImage(imger, 0, 0, img_width,img_height);
+			   window.URL.revokeObjectURL(this.src);
+			   remove_input_att(dis_arr);
+		
+	 }, false);
+		   let grayscale_DATA=0;
+		   let blur=0;
+           let brightness_DATA=100;
+           let sepia_DATA=0;
+		   let invert_DATA=0;
+		   let staurated_DATA=100;
+		   let contrast_DATA=100;
+		   let img;
+		   const bluring =()=>{
+	           blur=document.getElementById('blury').value;
+			   img.style.cssText="-webkit-filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+               img.style.cssText="filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+               
+               ctx.filter = "sepia("+sepia_DATA+"%) saturate("+staurated_DATA+"%) blur("+blur+"px) brightness("+brightness_DATA+"%) invert("+invert_DATA+"%) contrast("+contrast_DATA+"%)";
+			   ctx.drawImage(imger, 0, 0, img_width,img_height);
+	           handleChangeData();
+           }
+           const sepia =()=>{
+	           sepia_DATA=document.getElementById('sepia').value;
+               img.style.cssText="-webkit-filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+               img.style.cssText="filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+               
+			   ctx.filter = "sepia("+sepia_DATA+"%) saturate("+staurated_DATA+"%) blur("+blur+"px) brightness("+brightness_DATA+"%) invert("+invert_DATA+"%) contrast("+contrast_DATA+"%)";
+			   ctx.drawImage(imger, 0, 0, img_width,img_height);
+	           handleChangeData();
+           }
+		  const invert =()=>{
+			  invert_DATA=document.getElementById('invert').value;
+			  img.style.cssText="-webkit-filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+              img.style.cssText="filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+               
+			  ctx.filter = "sepia("+sepia_DATA+"%) saturate("+staurated_DATA+"%) blur("+blur+"px) brightness("+brightness_DATA+"%) invert("+invert_DATA+"%) contrast("+contrast_DATA+"%)";
+			  ctx.drawImage(imger, 0, 0, img_width,img_height);
+	          handleChangeData();
+	      }
+		  const contrast =()=>{
+	          contrast_DATA=document.getElementById('contrast').value;
+		      img.style.cssText="-webkit-filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+              img.style.cssText="filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+               
+			  ctx.filter = "sepia("+sepia_DATA+"%) saturate("+staurated_DATA+"%) blur("+blur+"px) brightness("+brightness_DATA+"%) invert("+invert_DATA+"%) contrast("+contrast_DATA+"%)";
+			  ctx.drawImage(imger, 0, 0, img_width,img_height);
+	          handleChangeData();
+		 
+	      }
+		  const  brighting=()=>{
+			  brightness_DATA=document.getElementById('brighter').value;
+			  img.style.cssText="-webkit-filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+              img.style.cssText="filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+               
+			  ctx.filter = "sepia("+sepia_DATA+"%) saturate("+staurated_DATA+"%) blur("+blur+"px) brightness("+brightness_DATA+"%) invert("+invert_DATA+"%) contrast("+contrast_DATA+"%)";
+			  ctx.drawImage(imger, 0, 0, img_width,img_height);
+	          handleChangeData();
+		  }
+		  const  satr=()=>{
+			 staurated_DATA=document.getElementById('satur').value;
+			 img.style.cssText="-webkit-filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+             img.style.cssText="filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%) invert("+invert_DATA+"%) blur("+blur+"px) contrast("+contrast_DATA+"%);"
+               
+			 ctx.filter = "sepia("+sepia_DATA+"%) saturate("+staurated_DATA+"%) blur("+blur+"px) brightness("+brightness_DATA+"%) invert("+invert_DATA+"%) contrast("+contrast_DATA+"%)";
+			 ctx.drawImage(imger, 0, 0, img_width,img_height);
+	         handleChangeData();
+		  }
+		 
+          function handleFiles(files){
+			  if(files.length){
+				 imger.src = window.URL.createObjectURL(files[0]);
+				 img=document.getElementById('demo_img')
+			     img.src=imger.src;
+              }
+          }
+		  //Download button
+		  let download=document.getElementById('download');
+		  download.addEventListener('click', function(ev){
+		  let fileName=prompt('Name your file');
+		  
+		  
+		  download.href =canvas.toDataURL();
+		  download.download = fileName+".png";
+		}, false);
+      			
+</script>
+  
+  
+  
+  
+  
+<script>
+   const openAside =()=>{
+     document.getElementsByTagName('aside')[0].style.display='block';
+	 document.getElementsByTagName('aside')[0].style.zIndex='1';
+   
+   }
+   const closeAside =()=>{
+     document.getElementsByTagName('aside')[0].style.display='none';
+	 document.getElementsByTagName('aside')[0].style.zIndex='0';
+   
+   }
+  
+  </script>
+   
+<script>
+  
+  
+  
+  let zoom_DATA=0;
+ const  zoomPhoto=()=>{
+	     zoom_DATA=document.getElementById('zoom').value;
+		 img.style.cssText="-webkit-filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) blur("+blur+"px)grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%)invert("+invert_DATA+"%)contrast("+contrast_DATA+")";
+	     img.style.cssText="filter: saturate("+staurated_DATA+"%) brightness("+brightness_DATA+"%) blur("+blur+"px)grayscale("+grayscale_DATA+"%) sepia("+sepia_DATA+"%)invert("+invert_DATA+"%)contrast("+contrast_DATA+") ";
+	     img.style="-ms-transform: scale("+zoom_DATA+")";
+		 img.style="-webkit-transform: scale("+zoom_DATA+")";
+		 img.style="transform: scale("+zoom_DATA+")";
+		 handleChangeData();
+	 }
+	 const handleChangeData =()=>{
+	   document.getElementById('blur_value').innerHTML=blur+"px";
+	   document.getElementById('grayscale_value').innerHTML=grayscale_DATA+"%";
+	   document.getElementById('sepia_value').innerHTML=sepia_DATA+"%";
+	   document.getElementById('invert_value').innerHTML=invert_DATA+"%";
+	   document.getElementById('contrast_value').innerHTML=contrast_DATA+"%";
+	   document.getElementById('brightness_value').innerHTML=brightness_DATA+"%";
+	   document.getElementById('saturation_value').innerHTML=staurated_DATA+"%";
+	   document.getElementById('zoom_value').innerHTML=zoom_DATA+"%";
+	 }
+  
+ 
+  
+  </script>
+   
+ 
+ 
+  </html>
