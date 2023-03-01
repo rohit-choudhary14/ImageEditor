@@ -33,27 +33,23 @@
         filter: saturate(100%) brightness(100%) grayscale(0%) sepia(0%)
           invert(0%) blur(0px) contrast(1);
       }
-      #file_select_section{
+      #file_select_section {
         position: fixed;
         top: 93%;
         width: 100%;
         height: auto;
-        align-item: center;
+   
         justify-content: center;
       }
-      input{
+      input {
         cursor: pointer;
       }
       nav {
-        background-color: #F2911F;
+        background-color: #f2911f;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
         height: 60px;
       }
-      #demo_img {
-       
-      }
-      #dashed_col {
-      }
+      
 
       #c {
         border: dashed 1px black;
@@ -68,71 +64,63 @@
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
         border-radius: 15px;
       }
-	  #topbar{
-	   height:0%;
-	   width:100%;
-	   background-color:#39323294;
-       top:60px;
-	   transition:height 0.3s;
-	  
-	  }
-	  #topbar_content{
-	    display:none;
-	  
-	  
-	  }
+      #topbar {
+        height: 0%;
+        width: 100%;
+        background-color: #39323294;
+        top: 60px;
+        transition: height 0.3s;
+      }
+      #topbar_content {
+        display: none;
+      }
     </style>
   </head>
 
   <body>
-  <section class='fixed-top text-dark' id='topbar'>
-    <div class='container mt-5' id='topbar_content'>
-		<div class='row'>
-		<div class='col-sm-12'>
-		
-		  <i class='fa fa-times text-light' style='float:right;font-size:25px;'></i>
-		
-		</div>
-		  <div class='col-sm-12 d-flex text-light'>
-		     <i class='fa fa-home p-2' style='font-size:25px'></i><a href='index.html' class='text-light p-2'>Home</a>
-		  </div>
-		  <div class='col-sm-12 d-flex text-light'>
-		   <i class="fa fa-compress p-2" style='font-size:25px'></i><a href='resize.html' class='text-light p-2'>Resize Image</a>
-		  </div>
-		  <div class='col-sm-12 d-flex text-light'>
-		   <i class='fa fa-crop p-2' style='font-size:25px'></i><a href='resize.html' class='text-light p-2' >Get Crop Image</a>
-		  </div>
-		   
-		</div>
-		
-	
-	</div>
-   
-  </section>
-    <nav class="sticky-top py-2">
-     
-	   <div class="col-sm-12 d-flex justify-content-around mt-1">
-            <i class="fa fa-bars text-light mt-1" ></i>
-              <button
-                class="btn btn-success"
-                style="background: #3b1470; border: #3b1470"
-                onclick="handleInputFileButton()"
-              >
-                BROWES FILE
-              </button>
-           
-              <a
-                class="btn btn-primary "
-                style="pointer-events: none"
-                id="download"
-                >DOWNLOAD</a
-              >
-            
+    <section class="fixed-top text-dark" id="topbar">
+      <div class="container mt-5" id="topbar_content">
+        <div class="row">
+          <div class="col-sm-12">
+            <i
+              class="fa fa-times text-light"
+              style="float: right; font-size: 25px; cursor: pointer"
+            ></i>
           </div>
+          <div class="col-sm-12 d-flex text-light">
+            <i class="fa fa-home p-2" style="font-size: 25px"></i
+            ><a href="#" class="text-light p-2">Home</a>
+          </div>
+          <div class="col-sm-12 d-flex text-light">
+            <i class="fa fa-compress p-2" style="font-size: 25px"></i
+            ><a href="resize.html" class="text-light p-2">Resize Image</a>
+          </div>
+          <div class="col-sm-12 d-flex text-light">
+            <i class="fa fa-crop p-2" style="font-size: 25px"></i
+            ><a href="crop.html" class="text-light p-2">Get Crop Image</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <nav class="sticky-top py-2">
+      <div class="col-sm-12 d-flex justify-content-around mt-1">
+        <i class="fa fa-bars text-light mt-1"></i>
+        <button
+          class="btn btn-success"
+          style="background: #3b1470; border: #3b1470"
+          onclick="handleInputFileButton()"
+        >
+          BROWES FILE
+        </button>
+
+        <a class="btn btn-primary" style="pointer-events: none" id="download"
+          >DOWNLOAD</a
+        >
+      </div>
     </nav>
 
     <!--- input your image---->
-    <div class="container" >
+    <div class="container">
       <div class="row card-body">
         <div class="col-sm-12">
           <center><canvas id="c"></canvas></center>
@@ -142,9 +130,8 @@
             <div class="col-sm-12 card-body" id="image_manager">
               <div class="row">
                 <div class="col-sm-12 center" id="dashed_col">
-                  
-                    <center>
-					<img src="demo.jpg" id="demo_img" class="img-fluid" />
+                  <center>
+                    <img src="demo.jpg" id="demo_img" class="img-fluid" />
                   </center>
                 </div>
               </div>
@@ -275,7 +262,7 @@
       </div>
     </div>
     <!-- browes your file button--->
-   
+
     <input
       type="file"
       id="infile"
@@ -285,418 +272,7 @@
   </body>
   <!-- handling asidebar--->
 
-
-<script>
-
-   document.getElementsByClassName('fa fa-bars text-light mt-1')[0].addEventListener('click',asideOpen =()=>{
-     document.getElementById('topbar').style.height='100%';
-	 document.getElementById('topbar_content').style.display='block';
-   });
-     document.getElementsByClassName('fa fa-times text-light')[0].addEventListener('click',asideClose =()=>{
-     document.getElementById('topbar').style.height='0%';
-	 document.getElementById('topbar_content').style.display='none';
-   });
-
-
-
-
-</script>
-  <script>
-    const handleInputFileButton = () => {
-      document.getElementById("infile").click();
-    };
-    let dis_arr = ["blury", "sepia", "invert", "contrast", "brighter", "satur"];
-    const remove_input_att = (arr) => {
-      arr.forEach((element) => {
-        document.getElementById(element).removeAttribute("disabled");
-      });
-    };
-    const handleChangeData = () => {
-      document.getElementById("blur_value").innerHTML = blur + "px";
-      
-      document.getElementById("sepia_value").innerHTML = sepia_DATA + "%";
-      document.getElementById("invert_value").innerHTML = invert_DATA + "%";
-      document.getElementById("contrast_value").innerHTML = contrast_DATA + "%";
-      document.getElementById("brightness_value").innerHTML =
-        brightness_DATA + "%";
-      document.getElementById("saturation_value").innerHTML =
-        staurated_DATA + "%";
-     
-    };
-    let window_height;
-    let window_width;
-    let img_height;
-    let img_width;
-    let canvas = document.getElementById("c");
-    let ctx = canvas.getContext("2d");
-    let imger = new Image();
-    imger.addEventListener(
-      "load",
-      function (e) {
-        window_height = screen.height;
-        window_width = screen.width;
-        if(e.target.height<=810){
-		     img.src = imger.src;
-			canvas.height = e.target.height;
-			canvas.width = e.target.width;
-			img_height = e.target.height;
-			img_width = e.target.width;
-			ctx.filter = "none";
-			ctx.drawImage(imger, 0, 0, img_width, img_height);
-			window.URL.revokeObjectURL(this.src);
-			
-			remove_input_att(dis_arr);
-		}
-		else{
-		   alert(`image height exceed it shoud me under 800 we are redirecting you to image resizer`);
-		   window.location.href='resize.html';
-		 
-		}
-      },
-      false
-    );
-    let grayscale_DATA = 0;
-    let blur = 0;
-    let brightness_DATA = 100;
-    let sepia_DATA = 0;
-    let invert_DATA = 0;
-    let staurated_DATA = 100;
-    let contrast_DATA = 100;
-    let img;
-    const bluring = () => {
-      blur = document.getElementById("blury").value;
-      img.style.cssText =
-        "-webkit-filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-      img.style.cssText =
-        "filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-
-      ctx.filter =
-        "sepia(" +
-        sepia_DATA +
-        "%) saturate(" +
-        staurated_DATA +
-        "%) blur(" +
-        blur +
-        "px) brightness(" +
-        brightness_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) contrast(" +
-        contrast_DATA +
-        "%)";
-      ctx.drawImage(imger, 0, 0, img_width, img_height);
-      handleChangeData();
-    };
-    const sepia = () => {
-      sepia_DATA = document.getElementById("sepia").value;
-      img.style.cssText =
-        "-webkit-filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-      img.style.cssText =
-        "filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-
-      ctx.filter =
-        "sepia(" +
-        sepia_DATA +
-        "%) saturate(" +
-        staurated_DATA +
-        "%) blur(" +
-        blur +
-        "px) brightness(" +
-        brightness_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) contrast(" +
-        contrast_DATA +
-        "%)";
-      ctx.drawImage(imger, 0, 0, img_width, img_height);
-      handleChangeData();
-    };
-    const invert = () => {
-      invert_DATA = document.getElementById("invert").value;
-      img.style.cssText =
-        "-webkit-filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-      img.style.cssText =
-        "filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-
-      ctx.filter =
-        "sepia(" +
-        sepia_DATA +
-        "%) saturate(" +
-        staurated_DATA +
-        "%) blur(" +
-        blur +
-        "px) brightness(" +
-        brightness_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) contrast(" +
-        contrast_DATA +
-        "%)";
-      ctx.drawImage(imger, 0, 0, img_width, img_height);
-      handleChangeData();
-    };
-    const contrast = () => {
-      contrast_DATA = document.getElementById("contrast").value;
-      img.style.cssText =
-        "-webkit-filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-      img.style.cssText =
-        "filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-
-      ctx.filter =
-        "sepia(" +
-        sepia_DATA +
-        "%) saturate(" +
-        staurated_DATA +
-        "%) blur(" +
-        blur +
-        "px) brightness(" +
-        brightness_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) contrast(" +
-        contrast_DATA +
-        "%)";
-      ctx.drawImage(imger, 0, 0, img_width, img_height);
-      handleChangeData();
-    };
-    const brighting = () => {
-      brightness_DATA = document.getElementById("brighter").value;
-      img.style.cssText =
-        "-webkit-filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-      img.style.cssText =
-        "filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-
-      ctx.filter =
-        "sepia(" +
-        sepia_DATA +
-        "%) saturate(" +
-        staurated_DATA +
-        "%) blur(" +
-        blur +
-        "px) brightness(" +
-        brightness_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) contrast(" +
-        contrast_DATA +
-        "%)";
-      ctx.drawImage(imger, 0, 0, img_width, img_height);
-      handleChangeData();
-    };
-    const satr = () => {
-      staurated_DATA = document.getElementById("satur").value;
-      img.style.cssText =
-        "-webkit-filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-      img.style.cssText =
-        "filter: saturate(" +
-        staurated_DATA +
-        "%) brightness(" +
-        brightness_DATA +
-        "%) grayscale(" +
-        grayscale_DATA +
-        "%) sepia(" +
-        sepia_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) blur(" +
-        blur +
-        "px) contrast(" +
-        contrast_DATA +
-        "%);";
-
-      ctx.filter =
-        "sepia(" +
-        sepia_DATA +
-        "%) saturate(" +
-        staurated_DATA +
-        "%) blur(" +
-        blur +
-        "px) brightness(" +
-        brightness_DATA +
-        "%) invert(" +
-        invert_DATA +
-        "%) contrast(" +
-        contrast_DATA +
-        "%)";
-      ctx.drawImage(imger, 0, 0, img_width, img_height);
-      handleChangeData();
-    };
-
-    function handleFiles(files) {
-      if (files.length) {
-        imger.src = window.URL.createObjectURL(files[0]);
-        img = document.getElementById("demo_img");
-		document.getElementById("download").style="pointer-events: auto";
-       
-      }
-    }
-    //Download button
-    let download = document.getElementById("download");
-    download.addEventListener(
-      "click",
-      function (ev) {
-        let fileName = prompt("Name your file");
-        if(fileName.length==0){
-		    fileName="img";
-		}
-            download.href = canvas.toDataURL();
-           download.download = fileName + ".png";
-      },
-      false
-    );
-  </script>
+  <script src='topbar.js'></script>
+ <script src='filter.js'></script>
+  
 </html>
