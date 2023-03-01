@@ -33,7 +33,7 @@
         filter: saturate(100%) brightness(100%) grayscale(0%) sepia(0%)
           invert(0%) blur(0px) contrast(1);
       }
-      #file_select_section {
+      #file_select_section{
         position: fixed;
         top: 93%;
         width: 100%;
@@ -41,8 +41,7 @@
         align-item: center;
         justify-content: center;
       }
-
-      input {
+      input{
         cursor: pointer;
       }
       nav {
@@ -75,8 +74,8 @@
   <body>
     <nav class="sticky-top py-2">
      
-	   <div class="col-sm-12 d-flex mt-1" style='column-gap:50px'>
-            <i class="fa fa-bars text-light mt-1" onclick="openAside()"></i>
+	   <div class="col-sm-12 d-flex justify-content-around mt-1">
+            <i class="fa fa-bars text-light mt-1"></i>
               <button
                 class="btn btn-success"
                 style="background: #3b1470; border: #3b1470"
@@ -86,7 +85,7 @@
               </button>
            
               <a
-                class="btn btn-primary"
+                class="btn btn-primary "
                 style="pointer-events: none"
                 id="download"
                 >DOWNLOAD</a
