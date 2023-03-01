@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Free Resize Images</title>
+    <link rel="icon" type="image/x-icon" href="logo.jpg" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+     
+      nav {
+        background-color: #e91e63;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+        height: 60px;
+      }
+	  .fa.fa-bars.text-light.mt-1 {
+        cursor: pointer;
+        font-size: 30px;
+      }
+      
+     
+    </style>
+  </head>
+
+  <body>
+    <nav class="sticky-top py-2">
+     
+	   <div class="col-sm-12 d-flex mt-1" style='column-gap:50px'>
+            <i class="fa fa-bars text-light mt-1" onclick="openAside()"></i>
+              <button
+                class="btn btn-success"
+                style="background: #3b1470; border: #3b1470"
+                onclick="handleInputFileButton()"
+              >
+                BROWES FILE
+              </button>
+           
+              <a
+                class="btn btn-primary"
+                style="pointer-events: none"
+                id="download"
+                >DOWNLOAD</a
+              >
+            
+          </div>
+    </nav>
+
+    <!--- input your image---->
+    <div class="container">
+      <div class="row card-body">
+	    <div class="col-sm-12">
+          <center><canvas id="c" style='display:none'></canvas></center>
+        </div>
+	   <div class='col-sm-12'>
+	     <center><h5>Image Resizer.Easily resize images online for free.</h5></center>
+	   </div>
+        
+        <div class="col-sm-12 card-body">
+          <div class="row card-body">
+            <div class="col-sm-12 card-body" id="image_manager">
+              <div class="row">
+                <div class="col-sm-12" id="dashed_col">
+				<div class='row'>
+				   <div class='col-sm-12'>
+				      <center>
+                      <img src="demo.jpg" id="demo_img"  style='height:181px,width:271'class="img-fluid" />
+                     </center>
+				   
+				   
+				   </div>
+				   <div class='col-sm-12' style='display:block'>
+				    
+					  <small>Width</small>
+					  <input type='text' id='width' class='form-control' value='271'/>
+					
+				   
+				   </div>
+				    <div class='col-sm-12 mt-3'style='display:block'>
+				
+					  <small>Height</small>
+					  <input type='text' id='height' class='form-control'  value='181'/>
+					
+				   
+				   </div>
+				    <div class='col-sm-12 mt-3'>
+				       <center >
+					     <button class='btn btn-primary btn-block'  onclick='resizeImage()'style='background:#966FD6;border:#966FD6' >Resize</button>
+					   </center>
+				   </div>
+				
+				</div>
+                  
+				  
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- browes your file button--->
+   
+    <input
+      type="file"
+      id="infile"
+      style="opacity: 0"
+      onchange="handleFiles(this.files)"/>
+  </body>
+  <!-- handling asidebar--->
+
+  <script>
+  let img_height;
+  let img_width;
+  let resize_height_DATA;
+  let resize_width_DATA;
+  let canvas = document.getElementById("c");
+  let ctx = canvas.getContext("2d");
+  let imger = new Image();
+  function handleFiles(files) {
+      if (files.length) {
+        imger.src = window.URL.createObjectURL(files[0]);
+        img= document.getElementById("demo_img");
+        img.src = imger.src;
+      }
+    }
+    const handleInputFileButton = () => {
+      document.getElementById("infile").click();
+    };
+	
+    
+    imger.addEventListener(
+      "load",
+      function (e) {
+        img_height=e.target.height;
+		img_width=e.target.width;
+		document.getElementById('height').value=img_height;
+		document.getElementById('width').value=img_width;
+		//ctx.filter = "none";
+		//ctx.drawImage(imger, 0, 0, resize_width_DATA, resize_height_DATA);
+		window.URL.revokeObjectURL(this.src);
+		 },
+      false
+    );
+    
+    //Download button
+    let download = document.getElementById("download");
+    download.addEventListener(
+      "click",
+      function (ev) {
+        let fileName = prompt("Name your file");
+
+        download.href = canvas.toDataURL();
+        download.download = fileName + ".png";
+      },
+      false
+    );
+	const resizeImage =()=>{
+	  resize_height_DATA=document.getElementById('height').value;
+	  resize_width_DATA=document.getElementById('width').value;
+	  document.getElementById('demo_img').style.height=resize_height_DATA+"px";
+	  document.getElementById('demo_img').style.width=resize_width_DATA+"px";
+	 
+	  canvas.height = resize_height_DATA;
+	  canvas.width = resize_width_DATA;
+	  ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+	  ctx.drawImage(imger, 0, 0, img_width, img_height);
+	  
+	  window.URL.revokeObjectURL(this.src);
+	  download.style="pointer-events:auto";
+	}
+  </script>
+</html>
