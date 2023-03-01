@@ -45,7 +45,7 @@
         cursor: pointer;
       }
       nav {
-        background-color: #e91e63;
+        background-color: #F2911F;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
         height: 60px;
       }
@@ -68,14 +68,51 @@
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
         border-radius: 15px;
       }
+	  #topbar{
+	   height:0%;
+	   width:100%;
+	   background-color:#39323294;
+       top:60px;
+	   transition:height 0.3s;
+	  
+	  }
+	  #topbar_content{
+	    display:none;
+	  
+	  
+	  }
     </style>
   </head>
 
   <body>
+  <section class='fixed-top text-dark' id='topbar'>
+    <div class='container mt-5' id='topbar_content'>
+		<div class='row'>
+		<div class='col-sm-12'>
+		
+		  <i class='fa fa-times text-light' style='float:right;font-size:25px;'></i>
+		
+		</div>
+		  <div class='col-sm-12 d-flex text-light'>
+		     <i class='fa fa-home p-2' style='font-size:25px'></i><a href='index.html' class='text-light p-2'>Home</a>
+		  </div>
+		  <div class='col-sm-12 d-flex text-light'>
+		   <i class="fa fa-compress p-2" style='font-size:25px'></i><a href='resize.html' class='text-light p-2'>Resize Image</a>
+		  </div>
+		  <div class='col-sm-12 d-flex text-light'>
+		   <i class='fa fa-crop p-2' style='font-size:25px'></i><a href='resize.html' class='text-light p-2' >Get Crop Image</a>
+		  </div>
+		   
+		</div>
+		
+	
+	</div>
+   
+  </section>
     <nav class="sticky-top py-2">
      
 	   <div class="col-sm-12 d-flex justify-content-around mt-1">
-            <i class="fa fa-bars text-light mt-1"></i>
+            <i class="fa fa-bars text-light mt-1" ></i>
               <button
                 class="btn btn-success"
                 style="background: #3b1470; border: #3b1470"
@@ -104,9 +141,10 @@
           <div class="row card-body">
             <div class="col-sm-12 card-body" id="image_manager">
               <div class="row">
-                <div class="col-sm-12" id="dashed_col">
-                  <center>
-                    <img src="demo.jpg" id="demo_img" class="img-fluid" />
+                <div class="col-sm-12 center" id="dashed_col">
+                  
+                    <center>
+					<img src="demo.jpg" id="demo_img" class="img-fluid" />
                   </center>
                 </div>
               </div>
@@ -247,6 +285,22 @@
   </body>
   <!-- handling asidebar--->
 
+
+<script>
+
+   document.getElementsByClassName('fa fa-bars text-light mt-1')[0].addEventListener('click',asideOpen =()=>{
+     document.getElementById('topbar').style.height='100%';
+	 document.getElementById('topbar_content').style.display='block';
+   });
+     document.getElementsByClassName('fa fa-times text-light')[0].addEventListener('click',asideClose =()=>{
+     document.getElementById('topbar').style.height='0%';
+	 document.getElementById('topbar_content').style.display='none';
+   });
+
+
+
+
+</script>
   <script>
     const handleInputFileButton = () => {
       document.getElementById("infile").click();
@@ -626,6 +680,7 @@
       if (files.length) {
         imger.src = window.URL.createObjectURL(files[0]);
         img = document.getElementById("demo_img");
+		document.getElementById("download").style="pointer-events: auto";
        
       }
     }
@@ -635,9 +690,11 @@
       "click",
       function (ev) {
         let fileName = prompt("Name your file");
-
-        download.href = canvas.toDataURL();
-        download.download = fileName + ".png";
+        if(fileName.length==0){
+		    fileName="img";
+		}
+            download.href = canvas.toDataURL();
+           download.download = fileName + ".png";
       },
       false
     );

@@ -29,7 +29,7 @@
     <style>
      
       nav {
-        background-color: #e91e63;
+        background-color: #F2911F;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
         height: 60px;
       }
@@ -37,12 +37,50 @@
         cursor: pointer;
         font-size: 30px;
       }
+	  #topbar{
+	   height:0%;
+	   width:100%;
+	   background-color:#39323294;
+       top:60px;
+	   transition:height 0.3s;
+	  
+	  }
+	  #topbar_content{
+	    display:none;
+	  
+	  
+	  }
+	 
       
      
     </style>
   </head>
 
   <body>
+  <section class='fixed-top text-dark' id='topbar'>
+    <div class='container mt-5' id='topbar_content'>
+		<div class='row'>
+		<div class='col-sm-12'>
+		
+		  <i class='fa fa-times text-light' style='float:right;font-size:25px'></i>
+		
+		</div>
+		  <div class='col-sm-12 d-flex text-light'>
+		     <i class='fa fa-home p-2' style='font-size:25px'></i><a href='index.html' class='text-light p-2'>Home</a>
+		  </div>
+		  <div class='col-sm-12 d-flex text-light'>
+		   <i class="fa fa-compress p-2" style='font-size:25px'></i><a href='resize.html' class='text-light p-2'>Resize Image</a>
+		  </div>
+		  <div class='col-sm-12 d-flex text-light'>
+		   <i class='fa fa-crop p-2' style='font-size:25px'></i><a href='resize.html' class='text-light p-2' >Get Crop Image</a>
+		  </div>
+		   
+		</div>
+		
+	
+	</div>
+   
+  </section>
     <nav class="sticky-top py-2">
      
 	   <div class="col-sm-12 d-flex justify-content-around mt-1" >
@@ -69,7 +107,7 @@
     <div class="container">
       <div class="row card-body">
 	    <div class="col-sm-12">
-          <center><canvas id="c" style='display:none'></canvas></center>
+         <canvas id="c" style='display:none'></canvas>
         </div>
 	   <div class='col-sm-12'>
 	     <center><h5>Image Resizer.Easily resize images online for free.</h5></center>
@@ -83,7 +121,7 @@
 				<div class='row'>
 				   <div class='col-sm-12'>
 				      <center>
-                      <img src="demo.jpg" id="demo_img"  style='height:181px,width:271'class="img-fluid" />
+                      <img src="demo.jpg" id="demo_img" height="181px" width="271" class="img-fluid" />
                      </center>
 				   
 				   
@@ -128,7 +166,21 @@
       onchange="handleFiles(this.files)"/>
   </body>
   <!-- handling asidebar--->
+<script>
 
+   document.getElementsByClassName('fa fa-bars text-light mt-1')[0].addEventListener('click',asideOpen =()=>{
+     document.getElementById('topbar').style.height='100%';
+	 document.getElementById('topbar_content').style.display='block';
+   });
+     document.getElementsByClassName('fa fa-times text-light')[0].addEventListener('click',asideClose =()=>{
+     document.getElementById('topbar').style.height='0%';
+	 document.getElementById('topbar_content').style.display='none';
+   });
+
+
+
+
+</script>
   <script>
   let img_height;
   let img_width;
@@ -154,38 +206,40 @@
       function (e) {
         img_height=e.target.height;
 		img_width=e.target.width;
+		canvas.height = e.target.height;
+		canvas.width = e.target.width;
 		document.getElementById('height').value=img_height;
 		document.getElementById('width').value=img_width;
-		//ctx.filter = "none";
-		//ctx.drawImage(imger, 0, 0, resize_width_DATA, resize_height_DATA);
 		window.URL.revokeObjectURL(this.src);
 		 },
       false
     );
     
-    //Download button
     let download = document.getElementById("download");
     download.addEventListener(
       "click",
       function (ev) {
         let fileName = prompt("Name your file");
-
-        download.href = canvas.toDataURL();
-        download.download = fileName + ".png";
+        if(fileName.length==0){
+		   fileName='img';
+		
+		}
+		
+            download.href = canvas.toDataURL();
+           download.download = fileName + ".png";
       },
       false
     );
 	const resizeImage =()=>{
 	  resize_height_DATA=document.getElementById('height').value;
 	  resize_width_DATA=document.getElementById('width').value;
-	  document.getElementById('demo_img').style.height=resize_height_DATA+"px";
-	  document.getElementById('demo_img').style.width=resize_width_DATA+"px";
-	 
-	  canvas.height = resize_height_DATA;
+	  document.getElementById('demo_img').setAttribute('height',resize_height_DATA);
+	  document.getElementById('demo_img').setAttribute('width',resize_width_DATA);
+	  canvas.height =resize_height_DATA;
 	  canvas.width = resize_width_DATA;
-	  ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
-	  ctx.drawImage(imger, 0, 0, img_width, img_height);
-	  
+	   
+	  ctx.drawImage(imger, 0,0,resize_width_DATA,resize_height_DATA);
+	 
 	  window.URL.revokeObjectURL(this.src);
 	  download.style="pointer-events:auto";
 	}
