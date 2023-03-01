@@ -56,7 +56,7 @@
         cursor: pointer;
       }
       nav {
-        background-color: #f2911f;
+        background-color: #7b5a94;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
         height: 60px;
       }
@@ -89,7 +89,7 @@
   </head>
   <body></body>
   <section class="fixed-top text-dark" id="topbar">
-    <div class="container mt-5" id="topbar_content">
+    <div class="container mt-1" id="topbar_content">
       <div class="row">
         <div class="col-sm-12">
           <i
@@ -113,26 +113,35 @@
     </div>
   </section>
   <nav class="sticky-top py-2">
-    <div class="col-sm-12 d-flex justify-content-around mt-1">
+    <div class="col-sm-12 d-flex justify-content-start mt-1">
       <i class="fa fa-bars text-light mt-1"></i>
-      <input
-        type="button"
-        value="Get cropped image"
-        id="image-getter"
-        class="jbutton dark btn btn-danger"
-      />
-
-      <a class="btn btn-primary" style="pointer-events: none" id="download"
-        >DOWNLOAD</a
-      >
+      
     </div>
   </nav>
+  <section class='fixed-bottom  py-2 d-flex justify-content-around bg-dark' style='height:55px;box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);'>
+	 <a     class='text-light'
+			
+			id="image-getter"
+			
+			
+			
+		  >Preview</a>
+
+         <a   class='text-light' style="pointer-events:none;" id="download"
+          >Download</a
+       >
+	</section>
   <canvas class="hide" id="c"></canvas>
   <div style="display: flex">
     <div id="image-cropper" style="border: 3px solid #ccc; margin: 5px"></div>
     <div id="image-cropper-result">
       <img style="width: 120px; height: 120px; margin: 5px" />
+	 
+	
+
+      
     </div>
+	
   </div>
 
  <script src='topbar.js'></script>

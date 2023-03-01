@@ -28,7 +28,7 @@
 
     <style>
       nav {
-        background-color: #f2911f;
+        background-color: #7b5a94;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
         height: 60px;
       }
@@ -51,7 +51,7 @@
 
   <body>
     <section class="fixed-top text-dark" id="topbar">
-      <div class="container mt-5" id="topbar_content">
+      <div class="container mt-1" id="topbar_content">
         <div class="row">
           <div class="col-sm-12">
             <i
@@ -75,22 +75,23 @@
       </div>
     </section>
     <nav class="sticky-top py-2">
-      <div class="col-sm-12 d-flex justify-content-around mt-1">
+      <div class="col-sm-12 d-flex justify-content-start mt-1">
         <i class="fa fa-bars text-light mt-1" onclick="openAside()"></i>
-        <button
-          class="btn btn-success"
-          style="background: #3b1470; border: #3b1470"
+      
+      </div>
+    </nav>
+<section class='fixed-bottom  py-2 d-flex justify-content-around bg-dark' style='height:55px;box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);'>
+	 <a
+          class='text-light'
           onclick="handleInputFileButton()"
         >
           BROWES FILE
-        </button>
+        </a>
 
-        <a class="btn btn-primary" style="pointer-events: none" id="download"
+        <a class='text-light' style="pointer-events: none;" id="download"
           >DOWNLOAD</a
         >
-      </div>
-    </nav>
-
+	</section>
     <!--- input your image---->
     <div class="container">
       <div class="row card-body">
